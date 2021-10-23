@@ -1,0 +1,5 @@
+SELECT ?b ?c
+WHERE {
+    ?a v:categoryName ?b .
+    ?a v:description ?c
+}

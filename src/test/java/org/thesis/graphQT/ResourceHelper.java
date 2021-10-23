@@ -9,15 +9,16 @@ import java.nio.charset.StandardCharsets;
 public class ResourceHelper {
 
     public static String loadSparqlQuery(final String prefix, final int number) throws IOException {
-        return loadQuery(prefix, number, Languages.sparql);
+        String path = "/queries/" + Languages.sparql.name() + "/" + prefix + number + "." + Languages.sparql.name();
+        return loadQuery(path);
     }
 
     public static String loadCypherQuery(final String prefix, final int number) throws IOException {
-        return loadQuery(prefix,number, Languages.cypher);
+        String path = "/queries/" + Languages.cypher.name() + "/" + prefix + number + "." + Languages.cypher.name();
+        return loadQuery(path);
     }
 
-    public static String loadQuery(final String prefix, final int number, final Languages lang) throws IOException {
-        final String path = "/queries/" + lang.name() + "/" + prefix + number + "." + lang.name();
+    public static String loadQuery(final String path) throws IOException {
         final InputStream stream = ResourceHelper.class.getResourceAsStream(path);
         return IOUtils.toString(stream, StandardCharsets.UTF_8);
     }

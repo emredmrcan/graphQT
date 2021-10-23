@@ -1,0 +1,6 @@
+SELECT distinct ?b ?c
+WHERE {
+    ?a v:productName ?b .
+    ?a v:unitsInStock ?c
+    FILTER(?c > 20)
+}

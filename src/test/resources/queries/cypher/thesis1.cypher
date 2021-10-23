@@ -1,1 +1,0 @@
-MATCH (s:Student) WHERE s.age = 25 RETURN s ORDER BY s.age LIMIT 20

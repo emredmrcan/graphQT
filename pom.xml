@@ -85,6 +85,12 @@
         </dependency>
         <!--     END:   SPARQL to GREMLIN        -->
 
+        <dependency>
+            <groupId>org.neo4j.driver</groupId>
+            <artifactId>neo4j-java-driver</artifactId>
+            <version>4.3.4</version>
+        </dependency>
+
     </dependencies>
 
 </project>

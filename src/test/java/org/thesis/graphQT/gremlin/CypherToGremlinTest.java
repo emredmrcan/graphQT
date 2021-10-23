@@ -10,11 +10,18 @@ import java.io.IOException;
 
 public class CypherToGremlinTest {
 
+    private final String prefix = "query";
+
     @Test
-    public void thesisQuery1() throws IOException {
-        CypherAst ast = CypherAst.parse(ResourceHelper.loadCypherQuery("thesis",1));
-        Translator<String, GroovyPredicate> translator = Translator.builder().gremlinGroovy().build();
-        String gremlin = ast.buildTranslation(translator);
+    public void query4() throws IOException {
+        int number = 4;
+        String gremlin = translateToGremlin(number);
         System.out.println(gremlin);
+    }
+
+    private String translateToGremlin(int number) throws IOException {
+        CypherAst ast = CypherAst.parse(ResourceHelper.loadCypherQuery(prefix, number));
+        Translator<String, GroovyPredicate> translator = Translator.builder().gremlinGroovy().build();
+        return ast.buildTranslation(translator);
     }
 }

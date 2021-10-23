@@ -1,0 +1,8 @@
+SELECT ?s
+WHERE {
+    ?s v:label "student";
+       v:age ?age .
+    FILTER (?age = 25)
+}
+ORDER BY ?age
+LIMIT 20

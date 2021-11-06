@@ -23,4 +23,9 @@ public class ResourceHelper {
         return IOUtils.toString(stream, StandardCharsets.UTF_8);
     }
 
+    public static String loadUniversityDomainSparqlQuery(final String prefix, final int number) throws IOException {
+        String path = "/queries/" + Languages.sparql.name() + "/sectionSparqlToCypher/" + prefix + number + "." + Languages.sparql.name();
+        return loadQuery(path);
+    }
+
 }

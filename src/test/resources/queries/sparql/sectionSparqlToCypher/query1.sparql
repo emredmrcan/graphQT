@@ -1,0 +1,6 @@
+SELECT ?a
+WHERE {
+    ?a v:label "university";
+       v:abbreviation ?abbreviation .
+    FILTER (?abbreviation = "DEU")
+}

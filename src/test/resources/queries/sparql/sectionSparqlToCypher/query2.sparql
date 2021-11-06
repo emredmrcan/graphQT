@@ -1,0 +1,5 @@
+SELECT distinct ?b
+WHERE {
+    ?a v:label "country" .
+    ?a v:name ?b
+}

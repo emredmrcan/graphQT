@@ -1,0 +1,8 @@
+SELECT ?a ?c
+WHERE {
+    ?a v:label "university" .
+    ?a e:located_in ?b .
+    ?b v:name "ITALY" .
+    ?a v:foundation ?c .
+    FILTER(?c < 1500)
+}ORDER BY (?c)

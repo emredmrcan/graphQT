@@ -321,7 +321,7 @@ public class SparqlToGremlinCompiler extends OpVisitorBase {
     public void visit(final OpBGP opBGP) {
         {
 
-            System.out.println("Inside opBGP ---------------------------------------------->");
+           // System.out.println("Inside opBGP ---------------------------------------------->");
             final List<Triple> triples = opBGP.getPattern().getList();
             final Traversal[] matchTraversals = new Traversal[triples.size()];
             int i = 0;
@@ -331,10 +331,10 @@ public class SparqlToGremlinCompiler extends OpVisitorBase {
                 if (optionalFlag) {
                     optionalTraversals.add(matchTraversals[i - 1]);
                     optionalVariable.add(triple.getObject().toString());
-                    System.out.println("Inside Optional traversal==========================");
+                    //System.out.println("Inside Optional traversal==========================");
                 } else {
                     traversalList.add(matchTraversals[i - 1]);
-                    System.out.println("Inside regular traversal==========================");
+                    //System.out.println("Inside regular traversal==========================");
                 }
             }
 
@@ -346,7 +346,7 @@ public class SparqlToGremlinCompiler extends OpVisitorBase {
     @Override
     public void visit(final OpFilter opFilter) {
 
-        System.out.println("Inside opFilter ---------------------------------------------->");
+        //System.out.println("Inside opFilter ---------------------------------------------->");
         Traversal traversal = null;
         for (Expr expr : opFilter.getExprs().getList()) {
             if (expr != null) {

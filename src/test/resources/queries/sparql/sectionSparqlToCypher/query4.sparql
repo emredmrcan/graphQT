@@ -1,0 +1,6 @@
+SELECT $c (COUNT(?a) as $total)
+WHERE {
+    ?a v:label "university" .
+    ?a e:located_in ?b .
+    ?b v:name ?c
+} GROUP BY (?c) ORDER BY DESC($total) LIMIT 2

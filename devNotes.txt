@@ -1,0 +1,61 @@
+CALL apoc.import.graphml("https://raw.githubusercontent.com/LITMUS-Benchmark-Suite/northwind-graphml/master/made_from_rdf.graphml", {})
+
+CALL apoc.import.graphml("https://raw.githubusercontent.com/harsh9t/bsbm1mgraph/master/bsbm1m.graphml", {})
+
+CALL apoc.import.graphml("https://raw.githubusercontent.com/emredmrcan/graphQT/master/src/test/resources/graphs/northwind.graphml", {})
+
+C:\Neo4j\relate-data\dbmss\dbms-9752aa06-59d2-4b6d-bf82-1871c9e04f01\import
+
+DB.DBA.TTLP_MT (file_to_string_output ('C:/Users/ardam/IdeaProjects/bsbmtools-0.2/dataset.ttl'), '', 'http://example.com');
+
+DB.DBA.TTLP_MT (file_to_string_output ('C:/Users/ardam/IdeaProjects/bsbmtools-0.2/dataset.ttl'), '', 'http://example2.com');
+
+
+select ?property from <http://example.com> where {?a v:ProductProperyTextual_1 ?property}
+
+PREFIX bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/>
+PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT ?product ?label
+FROM <http://example.com>
+WHERE { 
+ ?product rdfs:label ?label .
+ ?product bsbm:productPropertyTextual1 ?b  
+}
+
+// Create data with scale 1000 http://wifo5-03.informatik.uni-mannheim.de/bizer/berlinsparqlbenchmark/spec/BenchmarkRules/index.html#datagenerator
+java -cp lib/* benchmark.generator.Generator -fc -pc 1000 -s ttl -fn dataset_scale_1000
+// Load into Virtuoso
+DB.DBA.TTLP_MT (file_to_string_output ('C:/Users/ardam/IdeaProjects/bsbmtools-0.2/dataset_scale_1000.ttl'), '', 'http://bsbmScale1000.com');
+
+// Create data with scale 10000
+java -cp lib/* benchmark.generator.Generator -fc -pc 10000 -s ttl -fn dataset_scale_10000
+DB.DBA.TTLP_MT (file_to_string_output ('C:/Users/ardam/IdeaProjects/bsbmtools-0.2/dataset_scale_10000.ttl'), '', 'http://bsbmScale10000.com');
+
+java -cp lib/* benchmark.testdriver.TestDriver -ucf usecases/thesis/sparql.txt http://localhost:8890/sparql
+
+java -cp lib/* benchmark.testdriver.TestDriver -ucf usecases/thesis/sparql.txt -runs 1024 -w 128 http://localhost:8890/sparql
+
+java -cp lib/* benchmark.testdriver.TestDriver -ucf usecases/thesis/sparql.txt -runs 10 -w 20 http://localhost:8890/sparql
+
+//DROP GRAPH
+sparql DROP SILENT GRAPH <http://example.com> 
+
+
+//QUERY1
+PREFIX bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/>
+PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT ?product ?label
+FROM <http://bsbmScale1000.com>
+WHERE { 
+ ?product rdfs:label ?label .
+ ?product bsbm:productPropertyTextual1 ?b  
+}
+
+
+

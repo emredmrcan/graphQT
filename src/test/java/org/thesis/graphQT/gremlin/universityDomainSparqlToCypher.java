@@ -2,6 +2,7 @@ package org.thesis.graphQT.gremlin;
 
 import org.apache.tinkerpop.gremlin.process.traversal.Order;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
+import org.apache.tinkerpop.gremlin.process.traversal.Scope;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
@@ -30,7 +31,7 @@ public class universityDomainSparqlToCypher extends TinkerGraphCreator {
 
     @Test
     public void queryTranslations() throws IOException {
-        int totalQueries = 3;
+        int totalQueries = 4;
         for (int i = 1; i <= totalQueries; i++) {
             translateAndPrint(i);
         }
@@ -52,6 +53,23 @@ public class universityDomainSparqlToCypher extends TinkerGraphCreator {
 
         objects1.forEach(System.out::println);
         System.out.println("-----------------------------------");
+        g.V().match(
+                __.as("a").hasLabel("university"),
+                __.as("a").out("located_in").as("b"),
+                __.as("b").values("name").is("ITALY"),
+                __.as("a").values("foundation").as("c"),
+                __.where(__.as("c").is(P.lt((int) 1500))))
+                .order().by(__.select("a"), Order.asc)
+                .by(__.select("c")).toList().forEach(System.out::println);
+
+        System.out.println("-----------------------------------");
+        g.V().match(
+                __.as("a").hasLabel("university"),
+                __.as("a").out("located_in").as("b"),
+                __.as("b").values("name").as("c"))
+                .select("c").groupCount().order().by("total", Order.desc)
+                .range(Scope.local, 0L, 2L).toList().forEach(System.out::println);
+
     }
 
     @Test

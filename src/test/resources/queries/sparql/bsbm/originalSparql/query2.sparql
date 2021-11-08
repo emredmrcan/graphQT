@@ -1,0 +1,8 @@
+
+PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+
+SELECT ?propertyTextual1
+FROM<http://bsbmScale1000.com>
+WHERE {
+    <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer8/Product343>  bsbm:productPropertyTextual1 ?propertyTextual1 .
+}

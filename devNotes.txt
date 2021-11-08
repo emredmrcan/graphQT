@@ -34,6 +34,10 @@ DB.DBA.TTLP_MT (file_to_string_output ('C:/Users/ardam/IdeaProjects/bsbmtools-0.
 java -cp lib/* benchmark.generator.Generator -fc -pc 10000 -s ttl -fn dataset_scale_10000
 DB.DBA.TTLP_MT (file_to_string_output ('C:/Users/ardam/IdeaProjects/bsbmtools-0.2/dataset_scale_10000.ttl'), '', 'http://bsbmScale10000.com');
 
+// Create data with scale 1000 in xml format
+java -cp lib/* benchmark.generator.Generator -fc -pc 1000 -s xml -fn dataset_scale_1000
+DB.DBA.RDF_LOAD_RDFXML (file_to_string_output ('C:/Users/ardam/IdeaProjects/bsbmtools-0.2/dataset_scale_1000.xml'), '', 'http://bsbmScale1000.com');
+
 java -cp lib/* benchmark.testdriver.TestDriver -ucf usecases/thesis/sparql.txt http://localhost:8890/sparql
 
 java -cp lib/* benchmark.testdriver.TestDriver -ucf usecases/thesis/sparql.txt -runs 1024 -w 128 http://localhost:8890/sparql

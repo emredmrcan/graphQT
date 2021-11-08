@@ -1,0 +1,12 @@
+/F2
+
+PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+
+SELECT ?a ?propertyNumeric1 ?propertyNumeric2
+FROM<http://bsbmScale1000.com>
+WHERE {
+    ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> bsbm:Product .
+    ?a  bsbm:productPropertyNumeric1 ?propertyNumeric1 .
+    ?a  bsbm:productPropertyNumeric2 ?propertyNumeric2 .
+    FILTER (?propertyNumeric1 = 1 && ?propertyNumeric2 > 100)
+}

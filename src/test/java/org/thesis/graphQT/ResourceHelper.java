@@ -28,4 +28,9 @@ public class ResourceHelper {
         return loadQuery(path);
     }
 
+    public static String loadBSBMSparqlQuery(String prefix, int number) throws IOException {
+        String path = "/queries/" + Languages.sparql.name() + "/bsbm/" + prefix + number + "." + Languages.sparql.name();
+        return loadQuery(path);
+    }
+
 }

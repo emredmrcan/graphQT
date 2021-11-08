@@ -1,0 +1,8 @@
+//GC2
+
+SELECT ?pid (COUNT (?review) as ?total)
+WHERE {
+    ?review v:type "review" .
+    ?review e:edge ?product .
+    ?product v:productID ?pid.
+} GROUP BY(?pid) LIMIT 10

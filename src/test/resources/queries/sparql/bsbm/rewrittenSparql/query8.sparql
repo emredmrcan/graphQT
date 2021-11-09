@@ -1,5 +1,3 @@
-//l1
-
 SELECT ?rating
 WHERE {
     ?a v:type "review" .

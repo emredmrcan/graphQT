@@ -46,8 +46,7 @@ public class SparqlExecutionTest {
         ResultSet rs = st.executeQuery(query);
         prnRs(rs);
         endTime = System.currentTimeMillis();
-        System.out.println(
-                "time taken for convertToGremlinTraversal Function : " + (endTime - startTime) + " mili seconds");
+        //System.out.println("time taken for convertToGremlinTraversal Function : " + (endTime - startTime) + " mili seconds");
     }
 
     void prnRs(ResultSet rs) {

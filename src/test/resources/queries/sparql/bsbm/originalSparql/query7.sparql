@@ -1,10 +1,8 @@
-//GC2
-
-prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
 
 SELECT ?pid (COUNT (?review) as ?total)
 FROM<http://bsbmScale1000.com>
 WHERE {
     ?review bsbm:reviewFor ?pid .
 }
-GROUP BY (?pid) LIMIT 10
+GROUP BY (?pid) ORDER BY DESC (?total) LIMIT 10

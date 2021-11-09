@@ -1,7 +1,4 @@
-//c1
-// Get the total number of products that have a review
-
-prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
 
 SELECT  (count  (distinct (?pid)) as ?totalprods)
 FROM<http://bsbmScale1000.com>

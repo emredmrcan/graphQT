@@ -1,0 +1,3 @@
+g.V().match(__.as("product").values("ProductPropertyNumeric_4").as("propn4"))
+        .select("propn4").groupCount().order(Scope.local).by(Column.keys,Order.asc)
+        .range(Scope.local,0L,20L)

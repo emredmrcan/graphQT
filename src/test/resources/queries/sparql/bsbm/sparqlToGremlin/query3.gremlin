@@ -1,0 +1,1 @@
+g.V().match(__.as("a").values("reviewerID").as("rid"),__.as("a").out().as("review"),__.as("review").values("Rating_2").as("r1"),__.where(__.as("rid").is(P.eq((int) 86)))).select("a","review","r1")

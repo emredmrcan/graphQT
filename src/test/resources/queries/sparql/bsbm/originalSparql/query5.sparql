@@ -1,7 +1,5 @@
-//G1
-
-prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
-prefix rev: <http://purl.org/stuff/rev#>
+PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+PREFIX rev: <http://purl.org/stuff/rev#>
 
 SELECT ?country (COUNT(DISTINCT ?reviewer) as ?total)
 FROM<http://bsbmScale1000.com>

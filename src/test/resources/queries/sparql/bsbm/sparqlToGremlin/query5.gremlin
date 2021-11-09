@@ -1,0 +1,1 @@
+g.V().match(__.as("reviewer").values("type").is("reviewer"),__.as("reviewer").values("country").as("country")).select("country").groupCount()

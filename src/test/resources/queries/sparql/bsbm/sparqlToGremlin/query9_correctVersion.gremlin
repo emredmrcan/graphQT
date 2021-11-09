@@ -1,0 +1,7 @@
+g.V().match(
+        __.as("reviewer").values("type").is("reviewer"),
+        __.as("reviewer").out().as("review"),
+        __.as("review").out().as("product")
+).select("reviewer").groupCount()
+        .order(Scope.local).by(Column.values, Order.desc)
+        .range(Scope.local,0L,10L)

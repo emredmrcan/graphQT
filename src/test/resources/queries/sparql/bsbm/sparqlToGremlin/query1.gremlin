@@ -1,0 +1,1 @@
+g.V().match(__.as("a").values("type").is("review"),__.as("a").out("edge").as("product")).dedup("product").count()

@@ -1,5 +1,3 @@
-//F2
-
 SELECT ?pid ?property1 ?property2
 WHERE {
     ?a v:productID ?pid .

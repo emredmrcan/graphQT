@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "gremlinatorQueryNo": "C1",
+    "description": "Get the total number of products that have a review"
+  },
+  {
+    "id": 2,
+    "gremlinatorQueryNo": "C2",
+    "description": "Get the first textual property of a specific product"
+  },
+  {
+    "id": 3,
+    "gremlinatorQueryNo": "F1",
+    "description": "Get rating1 for all products with reviews written by a specific reviewer"
+  },
+  {
+    "id": 4,
+    "gremlinatorQueryNo": "F2",
+    "description": "Get all products with the first numeric property value equal to 1 and the second numeric property value greater than 100"
+  },
+  {
+    "id": 5,
+    "gremlinatorQueryNo": "G1",
+    "description": "Find the number of reviewers each country has"
+  },
+  {
+    "id": 6,
+    "gremlinatorQueryNo": "G3",
+    "description": "Find the first 20 results in ascending order by grouping all products according to Numeric Product Property 4"
+  },
+  {
+    "id": 7,
+    "gremlinatorQueryNo": "GC2",
+    "description": "Find the number of reviews for each product and limit the result to 10"
+  },
+  {
+    "id": 8,
+    "gremlinatorQueryNo": "L1",
+    "description": "Find all rating1 values for a given product and show two of them"
+  },
+  {
+    "id": 9,
+    "gremlinatorQueryNo": "M1",
+    "description": "Find the top 10 based on the total number of products per reviwer"
+  },
+  {
+    "id": 10,
+    "gremlinatorQueryNo": "S1",
+    "description": "Find all the information available for a specific product"
+  },
+  {
+    "id": 11,
+    "gremlinatorQueryNo": "U2",
+    "description": "Find the label and Product Numeric Property 1 of two specific products"
+  }
+]

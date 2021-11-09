@@ -1,12 +1,4 @@
-//g2
-!!!!
-select ?rating1
-where {
-                ?a v:type ""reviewer"" .
-                ?a v:reviewerID ?rid.
-                                 ?a e:edge ?review .
-                                 ?review v:Rating_1 ?rating1.
-                                 ?review e:edge ?product.
-                                 ?product v:productID ?pid.
-                             FILTER ( ?rid = 86).
-} GROUP BY (?rating1)
+SELECT (count(?propn4) as ?total)
+WHERE {
+    ?product v:ProductPropertyNumeric_4 ?propn4.
+} GROUP BY(?propn4) ORDER BY ASC(?propn4) LIMIT 20

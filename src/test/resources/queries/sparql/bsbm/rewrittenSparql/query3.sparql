@@ -1,9 +1,7 @@
-//F1
-
 SELECT  ?a ?review ?r1
 WHERE {
     ?a v:reviewerID ?rid.
     ?a e:edge ?review .
-    ?review v:Rating_1 ?r1.
+    ?review v:Rating_2 ?r1.
     FILTER ( ?rid = 86).
 }

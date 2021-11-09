@@ -1,4 +1,3 @@
-//u1
 SELECT ?pid ?label ?ppn1
 WHERE {
   {

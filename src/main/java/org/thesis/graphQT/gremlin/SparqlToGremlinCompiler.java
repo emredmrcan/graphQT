@@ -224,7 +224,7 @@ public class SparqlToGremlinCompiler extends OpVisitorBase {
             Traversal tempTrav;
             for (Var expr : lstExpr.getVars()) {
                 grpVar = expr.getName();
-                System.out.println("The Group by var: " + expr.getName());
+                //System.out.println("The Group by var: " + expr.getName());
             }
 
             if (query.hasLimit()) {
@@ -293,8 +293,7 @@ public class SparqlToGremlinCompiler extends OpVisitorBase {
 
         }
         endTime = System.currentTimeMillis();
-        System.out.println(
-                "time taken for convertToGremlinTraversal Function : " + (endTime - startTime) + " mili seconds");
+        //System.out.println("time taken for convertToGremlinTraversal Function : " + (endTime - startTime) + " mili seconds");
 
         return traversal;
     }
@@ -392,7 +391,7 @@ public class SparqlToGremlinCompiler extends OpVisitorBase {
     @Override
     public void visit(final OpUnion opUnion) {
 
-        System.out.println("Inside opUnion ---------------------------------------------->");
+        //System.out.println("Inside opUnion ---------------------------------------------->");
         Traversal unionTemp[] = new Traversal[2];
 
         if (optionalFlag) {

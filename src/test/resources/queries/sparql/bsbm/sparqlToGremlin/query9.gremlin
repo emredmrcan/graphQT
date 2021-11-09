@@ -1,0 +1,1 @@
+g.V().match(__.as("reviewer").values("type").is("reviewer"),__.as("reviewer").out("edge").as("review"),__.as("review").out("edge").as("product")).select("reviewer").groupCount().order().by("total",Order.desc).range(Scope.local,0L,10L)

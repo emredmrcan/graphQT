@@ -1,0 +1,1 @@
+g.V().match(__.as("a").values("type").is("review"),__.as("a").values("Rating_1").as("rating"),__.as("a").out("edge").as("product"),__.as("product").values("productID").as("pid"),__.where(__.as("pid").is(P.eq((int) 343)))).select("rating").range(0L,2L)

@@ -1,0 +1,19 @@
+g.V().match(
+        __.as("producer").values("type").is("producer"),
+        __.as("producer").values("label_n").as("plabel"),
+        __.as("producer").out().as("product"),
+        __.as("product").values("type").is("product"),
+        __.as("product").values("productID").as("pid"),
+        __.as("product").values("label_n").as("label"),
+        __.as("product").values("comment").as("comment"),
+        __.as("product").values("ProductPropertyTextual_1").as("proptext1"),
+        __.as("product").values("ProductPropertyTextual_2").as("proptext2"),
+        __.as("product").values("ProductPropertyTextual_3").as("proptext3"),
+        __.as("product").values("ProductPropertyNumeric_1").as("propnum1"),
+        __.as("product").values("ProductPropertyNumeric_2").as("propnum2"),
+        __.as("product").out().as("pfeature"),
+        __.as("pfeature").values("type").is("product_feature"),
+        __.as("pfeature").values("label_n").as("flabel"),
+        __.where(__.as("pid").is(P.eq((int) 343)))
+).select("plabel","label","flabel","proptext1","proptext2","proptext3","propnum1","propnum2","comment")
+        .range(0L,1L)

@@ -1,0 +1,1 @@
+g.V().match(__.as("a").values("productID").as("pid"),__.as("a").values("ProductPropertyNumeric_1").as("property1"),__.as("a").values("ProductPropertyNumeric_2").as("property2"),__.where(__.and(__.as("property1").is(P.eq((int) 1)),__.as("property2").is(P.gt((int) 100))))).select("pid","property1","property2")

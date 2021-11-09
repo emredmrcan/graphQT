@@ -1,9 +1,7 @@
-//g2
-prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
 
-SELECT ?review ?rating1
+SELECT  ?propn4 (count(?propn4) as ?total)
 FROM<http://bsbmScale1000.com>
 WHERE {
-    ?review bsbm:reviewFor <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer9/Product451> .
-    ?review bsbm:rating1 ?rating1 .
-} GROUP BY (?rating1)
+    ?a   bsbm:productPropertyNumeric4 ?propn4.
+} GROUP BY(?propn4) ORDER BY ASC(?propn4) LIMIT 20

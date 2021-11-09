@@ -1,0 +1,1 @@
+g.V().match(__.as("a").values("ProductPropertyTextual_1").as("property"),__.as("a").values("productID").as("pid"),__.where(__.as("pid").is(P.eq((int) 343)))).select("property")

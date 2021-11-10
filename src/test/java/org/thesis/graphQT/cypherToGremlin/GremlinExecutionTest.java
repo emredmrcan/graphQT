@@ -27,7 +27,7 @@ public class GremlinExecutionTest extends TinkerGraphCreator {
 
     @Before
     public void setUp() {
-        final String selectedGraphML = BSBM_GRAPHML_1000;
+        final String selectedGraphML = BSBM_GRAPHML_10000;
         graph = graph();
         g = graph.traversal();
         g.io(selectedGraphML).with(IO.reader, IO.graphml).read().iterate();
@@ -159,7 +159,7 @@ public class GremlinExecutionTest extends TinkerGraphCreator {
     public void calculateExecutionTimeForSingleQuery(int qID, Callable<GraphTraversal> fn) throws Exception {
         long startTime, endTime;
         startTime = System.nanoTime();
-        fn.call();
+        final GraphTraversal call = fn.call();
         endTime = System.nanoTime();
         final double total = (endTime - startTime) / 1e6;
         System.out.println(qID + ": " + total);

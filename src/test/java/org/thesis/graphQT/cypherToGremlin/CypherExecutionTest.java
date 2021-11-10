@@ -19,7 +19,8 @@ public class CypherExecutionTest extends Neo4jConnectionHelper {
     @Before
     public void setUp() {
         //connector = new Neo4jConnector(northwindConfig());
-        connector = new Neo4jConnector(bsbm1000Config());
+        //connector = new Neo4jConnector(bsbm1000Config());
+        connector = new Neo4jConnector(bsbm10000Config());
     }
 
     @Test

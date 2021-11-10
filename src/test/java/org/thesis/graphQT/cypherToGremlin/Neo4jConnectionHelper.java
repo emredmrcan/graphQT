@@ -11,4 +11,8 @@ public class Neo4jConnectionHelper {
     public static Neo4jConnectionConfiguration bsbm1000Config() {
         return new Neo4jConnectionConfiguration("bolt://localhost:7687", "neo4j", "BSBM_1000");
     }
+
+    public static Neo4jConnectionConfiguration bsbm10000Config() {
+        return new Neo4jConnectionConfiguration("bolt://localhost:7687", "neo4j", "BSBM_10000");
+    }
 }

@@ -160,6 +160,7 @@ public class GremlinExecutionTest extends TinkerGraphCreator {
         long startTime, endTime;
         startTime = System.nanoTime();
         final GraphTraversal call = fn.call();
+        System.out.println(call.toString());
         endTime = System.nanoTime();
         final double total = (endTime - startTime) / 1e6;
         System.out.println(qID + ": " + total);

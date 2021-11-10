@@ -59,6 +59,7 @@ public class CypherExecutionTest extends Neo4jConnectionHelper {
         long startTime, endTime;
         startTime = System.nanoTime();
         final List<Record> records = connector.queryRunner().apply(query);
+        System.out.println(records.size());
         endTime = System.nanoTime();
         final double total = (endTime - startTime) / 1e6;
         System.out.println(qID + ": " + total);

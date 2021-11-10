@@ -13,6 +13,7 @@ public class SparqlExecutionTest {
     static String urlDB = "jdbc:virtuoso://localhost:1111";
     Statement st;
 
+    private final int SCALE_FACTOR = 10000;
     private final String prefix = "query";
     private final int totalQuery = 11;
 
@@ -35,7 +36,7 @@ public class SparqlExecutionTest {
         long startTime, endTime;
         for (int qID = 1; qID < totalQuery + 1; qID++) {
             //for (int qID = totalQuery; qID > 0; qID--) {
-            final String inputQuery = "sparql " + loadOriginalBSBMSparqlQuery(prefix, qID);
+            final String inputQuery = "sparql " + loadOriginalBSBMSparqlQuery(prefix, qID, SCALE_FACTOR);
 
             startTime = System.nanoTime();
             ResultSet rs = st.executeQuery(inputQuery);
@@ -50,7 +51,7 @@ public class SparqlExecutionTest {
 
     @Test
     public void calculateColdExecutionTimeForSingleQuery() throws Exception {
-        int qID = 3;
+        int qID = 11;
         calculateExecutionTime(qID);
     }
 
@@ -75,7 +76,7 @@ public class SparqlExecutionTest {
 
     private void calculateExecutionTime(int qID) throws IOException, SQLException {
         long startTime, endTime;
-        final String inputQuery = "sparql " + loadOriginalBSBMSparqlQuery(prefix, qID);
+        final String inputQuery = "sparql " + loadOriginalBSBMSparqlQuery(prefix, qID, SCALE_FACTOR);
 
         startTime = System.nanoTime();
         ResultSet rs = st.executeQuery(inputQuery);

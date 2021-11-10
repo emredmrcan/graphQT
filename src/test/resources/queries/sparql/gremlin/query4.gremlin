@@ -1,1 +1,0 @@
-g.V().match(__.as("a").values("productName").as("b"),__.as("a").values("unitsInStock").as("c"),__.where(__.as("c").is(P.gt((int) 20)))).dedup("b","c").select("b","c")

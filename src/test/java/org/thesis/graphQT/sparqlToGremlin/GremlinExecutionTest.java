@@ -15,9 +15,12 @@ import org.thesis.graphQT.gremlin.TinkerGraphCreator;
 
 import java.util.concurrent.Callable;
 
+import static org.apache.tinkerpop.gremlin.process.traversal.P.*;
+
 public class GremlinExecutionTest extends TinkerGraphCreator {
 
     private final static String BSBM_GRAPHML_1000 = "src/test/resources/graphs/bsbm_scale_1000.graphml";
+    private final static String BSBM_GRAPHML_10000 = "src/test/resources/graphs/bsbm_scale_10000.graphml";
 
     private Graph graph;
     private GraphTraversalSource g;
@@ -124,9 +127,17 @@ public class GremlinExecutionTest extends TinkerGraphCreator {
 
     @Test
     public void singleQueryTest() {
-        g.V().match(__.as("a").values("reviewerID").as("rid"), __.as("a").out().as("review"),
-                __.as("review").values("Rating_2").as("r1"), __.where(__.as("rid").is(P.eq((int) 86))))
-                .select("a", "review", "r1").toList().forEach(System.out::println);
+        g.V().has("ProductPropertyNumeric_2", gt(100))
+                .has("ProductPropertyNumeric_1", eq(1))
+                .project("n.productID", "n.ProductPropertyNumeric_1", "n.ProductPropertyNumeric_2")
+                .by(__.choose(__.values("productID"), __.values("productID"), __.constant("  cypher.null")))
+                .by(__.choose(neq("  cypher.null"),
+                        __.choose(__.values("ProductPropertyNumeric_1"), __.values("ProductPropertyNumeric_1"),
+                                __.constant("  cypher.null"))))
+                .by(__.choose(neq("  cypher.null"), __.choose(__.values("ProductPropertyNumeric_2"),
+                        __.values("ProductPropertyNumeric_2"), __.constant("  cypher.null"))))
 
+
+                .toList().forEach(System.out::println);
     }
 }

@@ -1,0 +1,16 @@
+PREFIX bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/>
+PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+
+SELECT ?label ?propn1
+FROM<http://bsbmScale10000.com>
+WHERE {
+    {
+      <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer8/Product343> rdfs:label ?label .
+      <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer8/Product343> bsbm:productPropertyNumeric1 ?propn1.
+    }
+    UNION
+    {
+      <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer8/Product350> rdfs:label ?label .
+      <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer8/Product350> bsbm:productPropertyNumeric1 ?propn1.
+    }
+} LIMIT 10

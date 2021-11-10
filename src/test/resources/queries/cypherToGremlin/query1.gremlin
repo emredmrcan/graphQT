@@ -1,0 +1,4 @@
+g.V().has("type", eq("review")).outE().inV()
+                .dedup().is(neq("  cypher.null"))
+                .count().project("count(distinct product)")
+                .by(__.identity())

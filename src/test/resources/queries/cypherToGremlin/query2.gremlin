@@ -1,0 +1,6 @@
+g.V().has("productID", eq(343))
+        .project("n.ProductPropertyTextual_1").
+        by(__.choose(
+                        __.values("ProductPropertyTextual_1"),
+                        __.values("ProductPropertyTextual_1"),
+                        __.constant("  cypher.null")))

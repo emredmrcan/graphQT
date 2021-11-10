@@ -1,0 +1,26 @@
+g.V().as("a").has("reviewerID", eq(86))
+        .outE().inV().as("r")
+        .where(
+                __.select("r")
+                        .choose(neq("  cypher.null"),
+                                __.choose(
+                                        __.values("Rating_2"),
+                                        __.values("Rating_2"),
+                                        __.constant("  cypher.null"))
+                        ).choose(__.is(neq("  cypher.null")), __.constant(true), __.constant(false))
+                        .is(neq("  cypher.null"))
+                        .is(eq(true))
+        ).select("a", "r")
+        .project("a.identity", "r.identity", "r.Rating_2")
+        .by(__.select("a").choose(neq("  cypher.null"),
+                __.choose(__.values("identity"),
+                        __.values("identity"),
+                        __.constant("  cypher.null")))
+        ).by(__.select("r").choose(neq("  cypher.null"),
+        __.choose(__.values("identity"),
+                __.values("identity"),
+                __.constant("  cypher.null"))))
+        .by(__.select("r").choose(neq("  cypher.null"),
+                __.choose(__.values("Rating_2"),
+                        __.values("Rating_2"),
+                        __.constant("  cypher.null"))))

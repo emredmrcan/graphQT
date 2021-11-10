@@ -62,4 +62,13 @@ WHERE {
 }
 
 
+// NEO4j import graphml
+#********************************************************************
+# Other Neo4j system properties
+#********************************************************************
+apoc.import.file.enabled=true
+
+CALL apoc.import.graphml("file://bsbm_scale_1000.graphml", {})
+
+
 

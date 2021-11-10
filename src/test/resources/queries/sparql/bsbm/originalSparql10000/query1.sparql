@@ -1,0 +1,8 @@
+PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+
+SELECT  (count  (distinct (?pid)) as ?totalprods)
+FROM<http://bsbmScale10000.com>
+WHERE {
+    ?review bsbm:reviewFor ?product .
+    ?product rdfs:label ?pid.
+}

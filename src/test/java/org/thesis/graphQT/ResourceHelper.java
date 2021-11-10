@@ -28,8 +28,8 @@ public class ResourceHelper {
         return loadQuery(path);
     }
 
-    public static String loadOriginalBSBMSparqlQuery(String prefix, int number) throws IOException {
-        String path = "/queries/sparql/bsbm/originalSparql/" + prefix + number + "." + Languages.sparql.name();
+    public static String loadOriginalBSBMSparqlQuery(String prefix, int number, int scale) throws IOException {
+        String path = "/queries/sparql/bsbm/originalSparql" + scale + "/" + prefix + number + "." + Languages.sparql.name();
         return loadQuery(path);
     }
 

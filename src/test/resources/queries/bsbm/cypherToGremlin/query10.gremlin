@@ -1,0 +1,1 @@
+g.V().has("productID", eq(343)).project("n").by(__.valueMap().with("~tinkerpop.valueMap.tokens"))

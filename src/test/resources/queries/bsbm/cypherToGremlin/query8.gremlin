@@ -1,0 +1,4 @@
+g.V().as("review").has("type", eq("review")).outE().inV().has("productID", eq(343))
+        .select("review").project("review.Rating_2")
+        .by(__.choose(__.values("Rating_2"), __.values("Rating_2"), __.constant("  cypher.null")))
+        .limit(2)

@@ -15,7 +15,8 @@ import org.thesis.graphQT.gremlin.TinkerGraphCreator;
 
 import java.util.concurrent.Callable;
 
-import static org.apache.tinkerpop.gremlin.process.traversal.P.*;
+import static org.apache.tinkerpop.gremlin.process.traversal.P.eq;
+import static org.apache.tinkerpop.gremlin.process.traversal.P.neq;
 
 public class GremlinExecutionTest extends TinkerGraphCreator {
 
@@ -127,17 +128,15 @@ public class GremlinExecutionTest extends TinkerGraphCreator {
 
     @Test
     public void singleQueryTest() {
-        g.V().has("ProductPropertyNumeric_2", gt(100))
-                .has("ProductPropertyNumeric_1", eq(1))
-                .project("n.productID", "n.ProductPropertyNumeric_1", "n.ProductPropertyNumeric_2")
-                .by(__.choose(__.values("productID"), __.values("productID"), __.constant("  cypher.null")))
-                .by(__.choose(neq("  cypher.null"),
-                        __.choose(__.values("ProductPropertyNumeric_1"), __.values("ProductPropertyNumeric_1"),
-                                __.constant("  cypher.null"))))
-                .by(__.choose(neq("  cypher.null"), __.choose(__.values("ProductPropertyNumeric_2"),
-                        __.values("ProductPropertyNumeric_2"), __.constant("  cypher.null"))))
-
-
+        g.inject("  cypher.start")
+                .union(__.V().has("productID", eq(343))
+                                .project("n.ProductPropertyNumeric_1").by(__.choose(neq("  cypher.null"),
+                                __.choose(__.values("ProductPropertyNumeric_1"),
+                                        __.values("ProductPropertyNumeric_1"), __.constant("  cypher.null")))),
+                        __.V().has("productID", eq(350)).project("n.ProductPropertyNumeric_1")
+                                .by(__.choose(neq("  cypher.null"), __.choose(__.values("ProductPropertyNumeric_1"),
+                                        __.values("ProductPropertyNumeric_1"), __.constant("  cypher.null")))))
+                .dedup()
                 .toList().forEach(System.out::println);
     }
 }

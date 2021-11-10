@@ -1,0 +1,9 @@
+g.inject("  cypher.start")
+        .union(__.V().has("productID", eq(343))
+                .project("n.ProductPropertyNumeric_1").by(__.choose(neq("  cypher.null"),
+                        __.choose(__.values("ProductPropertyNumeric_1"),
+                                __.values("ProductPropertyNumeric_1"), __.constant("  cypher.null")))),
+                __.V().has("productID", eq(350)).project("n.ProductPropertyNumeric_1")
+                        .by(__.choose(neq("  cypher.null"), __.choose(__.values("ProductPropertyNumeric_1"),
+                                __.values("ProductPropertyNumeric_1"), __.constant("  cypher.null")))))
+        .dedup()

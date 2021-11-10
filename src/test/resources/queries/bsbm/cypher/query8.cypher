@@ -1,0 +1,1 @@
+MATCH (review {type:"review"})-[]->(p {productID:343}) RETURN review.Rating_2 LIMIT 2

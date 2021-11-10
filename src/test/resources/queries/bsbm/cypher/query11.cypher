@@ -1,0 +1,1 @@
+MATCH (n{productID:343}) RETURN n.ProductPropertyNumeric_1 UNION MATCH (n{productID:350}) RETURN n.ProductPropertyNumeric_1

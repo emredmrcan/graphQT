@@ -25,31 +25,6 @@ public class SparqlExecutionTest {
     }
 
     @Test
-    public void name() throws SQLException {
-        String query = "sparql SELECT * from <http://example.com> WHERE {?s ?p ?o}";
-        ResultSet rs = st.executeQuery(query);
-        prnRs(rs);
-    }
-
-    @Test
-    public void calculateExecutionTime() throws Exception {
-        long startTime, endTime;
-        for (int qID = 1; qID < totalQuery + 1; qID++) {
-            //for (int qID = totalQuery; qID > 0; qID--) {
-            final String inputQuery = "sparql " + loadOriginalBSBMSparqlQuery(prefix, qID, SCALE_FACTOR);
-
-            startTime = System.nanoTime();
-            ResultSet rs = st.executeQuery(inputQuery);
-            countResultSet(rs);
-            endTime = System.nanoTime();
-
-            final double total = (endTime - startTime) / 1e6;
-            System.out.println(qID + ": " + total);
-            System.out.println("------------------");
-        }
-    }
-
-    @Test
     public void calculateColdExecutionTimeForSingleQuery() throws Exception {
         int qID = 11;
         calculateExecutionTime(qID);

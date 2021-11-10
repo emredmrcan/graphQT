@@ -1,0 +1,8 @@
+g.V().as("review").has("type", eq("review")).outE().inV().as("product")
+        .select("product", "review").group().by(__.select("product").choose(__.values("productID"),
+                __.values("productID"), __.constant("  cypher.null")))
+        .by(__.fold().project("product.productID", "total").by(__.unfold().select("product")
+                .choose(neq("  cypher.null"), __.choose(__.values("productID"),
+                        __.values("productID"), __.constant("  cypher.null"))))
+                .by(__.unfold().select("review").is(neq("  cypher.null")).count())).unfold()
+        .select(Column.values).order().by(__.select("total"), Order.desc).limit(10)

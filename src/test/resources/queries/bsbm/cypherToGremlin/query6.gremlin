@@ -1,0 +1,16 @@
+g.V().group().by(__.choose(__.values('ProductPropertyNumeric_4'), __.values('ProductPropertyNumeric_4'), __.constant('  cypher.null'))).by(__.fold().project('a.ProductPropertyNumeric_4', 'count(*)').by(__.unfold().choose(neq('  cypher.null'), __.choose(__.values('ProductPropertyNumeric_4'), __.values('ProductPropertyNumeric_4'), __.constant('  cypher.null')))).by(__.unfold().count())).unfold().select(values).order().by(__.select('a.ProductPropertyNumeric_4'), asc).limit(20)
+
+//Order by FAILS
+// java.lang.ClassCastException: class java.lang.Integer cannot be cast to class java.lang.String (java.lang.Integer and java.lang.String are in module java.base of loader 'bootstrap')
+// See https://github.com/opencypher/cypher-for-gremlin/tree/master/tinkerpop/cypher-gremlin-extensions
+// g.inject(1).inject('string').max()  // fails java.lang.Integer cannot be cast to java.lang.String
+
+//So we removed order by
+g.V().group().by(__.choose(__.values("ProductPropertyNumeric_4"), __.values("ProductPropertyNumeric_4"),
+                __.constant("  cypher.null"))).by(__.fold().project("a.ProductPropertyNumeric_4", "count(*)")
+                .by(__.unfold().choose(neq("  cypher.null"),
+                        __.choose(__.values("ProductPropertyNumeric_4"), __.values("ProductPropertyNumeric_4"),
+                                __.constant("  cypher.null")))).by(__.unfold().count()))
+                .unfold().select(Column.values).limit(20)
+
+//Alternatively we can use, sparqltogremlin query6

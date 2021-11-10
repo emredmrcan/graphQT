@@ -1,0 +1,1 @@
+MATCH (a) RETURN a.ProductPropertyNumeric_4, count(*) ORDER BY a.ProductPropertyNumeric_4 ASC LIMIT 20

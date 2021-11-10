@@ -1,0 +1,1 @@
+MATCH (review {type:"review"})-[]->(product) RETURN product.productID, count(review) as total ORDER BY total DESC LIMIT 10

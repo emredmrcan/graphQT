@@ -1,0 +1,8 @@
+g.V().as("reviewer").has("type", eq("reviewer")).outE().as("  UNNAMED35")
+        .inV().outE().as("  UNNAMED48").inV().where(__.select("  UNNAMED35")
+        .where(neq("  UNNAMED48"))).select("reviewer").group().by(__.identity())
+        .by(__.fold().project("reviewer", "total").by(__.unfold())
+                .by(__.unfold().count())).unfold()
+        .select(Column.values).order().by(__.select("total"), Order.desc).limit(10)
+        .project("reviewer", "total").by(__.select("reviewer")
+        .valueMap().with("~tinkerpop.valueMap.tokens")).by(__.select("total").identity())

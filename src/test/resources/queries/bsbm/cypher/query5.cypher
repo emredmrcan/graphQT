@@ -1,0 +1,1 @@
+MATCH (a) WHERE a.type = "reviewer" RETURN a.country, count(*)

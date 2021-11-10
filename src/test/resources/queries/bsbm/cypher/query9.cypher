@@ -1,0 +1,1 @@
+MATCH (reviewer {type:"reviewer"})-[]->(review)-[]->(product) RETURN reviewer, count(*) as total ORDER BY total DESC LIMIT 10

@@ -1,0 +1,1 @@
+g.V().has("type", eq("reviewer")).group().by(__.choose(__.values("country"), __.values("country"), __.constant("  cypher.null"))).by(__.fold().project("a.country", "count(*)").by(__.unfold().choose(neq("  cypher.null"), __.choose(__.values("country"), __.values("country"), __.constant("  cypher.null")))).by(__.unfold().count())).unfold().select(Column.values)

@@ -1,9 +1,10 @@
-package org.thesis.graphQT.cypher;
+package org.thesis.graphQT.cypherToGremlin;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.neo4j.driver.Record;
+import org.thesis.graphQT.cypher.Neo4jConnector;
 
 import java.util.List;
 

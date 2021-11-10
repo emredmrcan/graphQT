@@ -8,6 +8,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSo
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.structure.Column;
 import org.apache.tinkerpop.gremlin.structure.Graph;
+import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 import org.junit.Before;
 import org.junit.Test;
 import org.thesis.graphQT.gremlin.TinkerGraphCreator;
@@ -21,6 +22,7 @@ public class GremlinExecutionTest extends TinkerGraphCreator {
 
     private final static String BSBM_GRAPHML_1000 = "src/test/resources/graphs/bsbm_scale_1000.graphml";
     private final static String BSBM_GRAPHML_10000 = "src/test/resources/graphs/bsbm_scale_10000.graphml";
+    private final static boolean INDEXING = true;
 
     private Graph graph;
     private GraphTraversalSource g;
@@ -31,6 +33,9 @@ public class GremlinExecutionTest extends TinkerGraphCreator {
         graph = graph();
         g = graph.traversal();
         g.io(selectedGraphML).with(IO.reader, IO.graphml).read().iterate();
+        if (INDEXING) {
+            addBSBMIndexes((TinkerGraph) graph);
+        }
     }
 
     @Test

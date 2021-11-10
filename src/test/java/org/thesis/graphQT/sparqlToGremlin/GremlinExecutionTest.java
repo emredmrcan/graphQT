@@ -9,6 +9,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSo
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.structure.Column;
 import org.apache.tinkerpop.gremlin.structure.Graph;
+import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 import org.junit.Before;
 import org.junit.Test;
 import org.thesis.graphQT.gremlin.TinkerGraphCreator;
@@ -22,7 +23,7 @@ public class GremlinExecutionTest extends TinkerGraphCreator {
 
     private final static String BSBM_GRAPHML_1000 = "src/test/resources/graphs/bsbm_scale_1000.graphml";
     private final static String BSBM_GRAPHML_10000 = "src/test/resources/graphs/bsbm_scale_10000.graphml";
-
+    private final static boolean INDEXING = true;
     private Graph graph;
     private GraphTraversalSource g;
 
@@ -32,6 +33,14 @@ public class GremlinExecutionTest extends TinkerGraphCreator {
         graph = graph();
         g = graph.traversal();
         g.io(selectedGraphML).with(IO.reader, IO.graphml).read().iterate();
+        if (INDEXING) {
+            addBSBMIndexes((TinkerGraph) graph);
+        }
+    }
+
+    @Test
+    public void name() {
+        System.out.println("test");
     }
 
     @Test
@@ -52,25 +61,7 @@ public class GremlinExecutionTest extends TinkerGraphCreator {
     public void calculateExecutionTimeForAllQueries() throws Exception {
         Callable<GraphTraversal> callable = null;
 
-        callable = () -> g.V().match(__.as("a").values("type").is("review"), __.as("a").out().as("product")).dedup("product").count();
-        calculateExecutionTimeForSingleQuery(1, callable);
 
-        callable = () -> g.V().match(__.as("a").values("ProductPropertyTextual_1").as("property"), __.as("a").values("productID").as("pid"), __.where(__.as("pid").is(P.eq((int) 343)))).select("property");
-        calculateExecutionTimeForSingleQuery(2, callable);
-
-        callable = () -> g.V().match(__.as("a").values("reviewerID").as("rid"), __.as("a").out().as("review"), __.as("review").values("Rating_2").as("r1"), __.where(__.as("rid").is(P.eq((int) 86)))).select("a", "review", "r1");
-        calculateExecutionTimeForSingleQuery(3, callable);
-
-        callable = () -> g.V().match(__.as("a").values("productID").as("pid"), __.as("a").values("ProductPropertyNumeric_1").as("property1"), __.as("a").values("ProductPropertyNumeric_2").as("property2"), __.where(__.and(__.as("property1").is(P.eq((int) 1)), __.as("property2").is(P.gt((int) 100))))).select("pid", "property1", "property2");
-        calculateExecutionTimeForSingleQuery(4, callable);
-
-        callable = () -> g.V().match(__.as("reviewer").values("type").is("reviewer"), __.as("reviewer").values("country").as("country")).select("country").groupCount();
-        calculateExecutionTimeForSingleQuery(5, callable);
-
-        callable = () -> g.V().match(__.as("product").values("ProductPropertyNumeric_4").as("propn4"))
-                .select("propn4").groupCount().order(Scope.local).by(Column.keys, Order.asc)
-                .range(Scope.local, 0L, 20L);
-        calculateExecutionTimeForSingleQuery(6, callable);
 
         callable = () -> g.V().match(__.as("review").values("type").is("review"), __.as("review").out().as("product"), __.as("product").values("productID").as("pid")).select("pid").groupCount().order(Scope.local).by(Column.values, Order.desc).range(Scope.local, 0L, 10L);
         calculateExecutionTimeForSingleQuery(7, callable);
@@ -116,6 +107,26 @@ public class GremlinExecutionTest extends TinkerGraphCreator {
 
         callable = () -> g.V().union(__.match(__.as("a").values("productID").as("pid"), __.as("a").values("label_n").as("label"), __.as("a").values("ProductPropertyNumeric_1").as("ppn1"), __.where(__.as("pid").is(P.eq((int) 343)))), __.match(__.as("a").values("productID").as("pid"), __.as("a").values("label_n").as("label"), __.as("a").values("ProductPropertyNumeric_1").as("ppn1"), __.where(__.as("pid").is(P.eq((int) 350))))).select("pid", "label", "ppn1");
         calculateExecutionTimeForSingleQuery(11, callable);
+
+        callable = () -> g.V().match(__.as("a").values("type").is("review"), __.as("a").out().as("product")).dedup("product").count();
+        calculateExecutionTimeForSingleQuery(1, callable);
+
+        callable = () -> g.V().match(__.as("a").values("ProductPropertyTextual_1").as("property"), __.as("a").values("productID").as("pid"), __.where(__.as("pid").is(P.eq((int) 343)))).select("property");
+        calculateExecutionTimeForSingleQuery(2, callable);
+
+        callable = () -> g.V().match(__.as("a").values("reviewerID").as("rid"), __.as("a").out().as("review"), __.as("review").values("Rating_2").as("r1"), __.where(__.as("rid").is(P.eq((int) 86)))).select("a", "review", "r1");
+        calculateExecutionTimeForSingleQuery(3, callable);
+
+        callable = () -> g.V().match(__.as("a").values("productID").as("pid"), __.as("a").values("ProductPropertyNumeric_1").as("property1"), __.as("a").values("ProductPropertyNumeric_2").as("property2"), __.where(__.and(__.as("property1").is(P.eq((int) 1)), __.as("property2").is(P.gt((int) 100))))).select("pid", "property1", "property2");
+        calculateExecutionTimeForSingleQuery(4, callable);
+
+        callable = () -> g.V().match(__.as("reviewer").values("type").is("reviewer"), __.as("reviewer").values("country").as("country")).select("country").groupCount();
+        calculateExecutionTimeForSingleQuery(5, callable);
+
+        callable = () -> g.V().match(__.as("product").values("ProductPropertyNumeric_4").as("propn4"))
+                .select("propn4").groupCount().order(Scope.local).by(Column.keys, Order.asc)
+                .range(Scope.local, 0L, 20L);
+        calculateExecutionTimeForSingleQuery(6, callable);
     }
 
     public void calculateExecutionTimeForSingleQuery(int qID, Callable<GraphTraversal> fn) throws Exception {

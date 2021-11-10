@@ -47,7 +47,6 @@ java -cp lib/* benchmark.testdriver.TestDriver -ucf usecases/thesis/sparql.txt -
 //DROP GRAPH
 sparql DROP SILENT GRAPH <http://example.com> 
 
-
 //QUERY1
 PREFIX bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/>
 PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
@@ -69,5 +68,20 @@ WHERE {
 apoc.import.file.enabled=true
 
 CALL apoc.import.graphml("file://dataset10000.graphml", {})
+
+//NEO4J Indexing -  if nothing is specified is native-btree-1.0.
+CREATE INDEX product_property_textual_1_index FOR (n:ProductPropertyTextual_1) ON (n.ProductPropertyTextual_1)
+CREATE INDEX product_property_textual_2_index FOR (n:ProductPropertyTextual_2) ON (n.ProductPropertyTextual_2)
+CREATE INDEX product_property_textual_3_index FOR (n:ProductPropertyTextual_3) ON (n.ProductPropertyTextual_3)
+CREATE INDEX product_property_numeric_1_index FOR (n:ProductPropertyNumeric_1) ON (n.ProductPropertyNumeric_1)
+CREATE INDEX product_property_numeric_2_index FOR (n:ProductPropertyNumeric_2) ON (n.ProductPropertyNumeric_2)
+CREATE INDEX product_property_numeric_4_index FOR (n:ProductPropertyNumeric_4) ON (n.ProductPropertyNumeric_4)
+CREATE INDEX review_index FOR (n:review) ON (n.review)
+CREATE INDEX reviewer_id_index FOR (n:reviewerID) ON (n.reviewerID)
+CREATE INDEX product_id_index FOR (n:productID) ON (n.productID)
+CREATE INDEX type_index FOR (n:type) ON (n.type)
+CREATE INDEX rating2_index FOR (n:Rating_2) ON (n.Rating_2)
+CREATE INDEX label_n_index FOR (n:label_n) ON (n.label_n)
+
 
 

@@ -8,6 +8,7 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 
 import java.util.List;
+import java.util.Set;
 
 public class TinkerGraphCreator {
 
@@ -39,5 +40,15 @@ public class TinkerGraphCreator {
         unige.addEdge("located_in", italy);
         italy.addEdge("connection", turkey, new Object[]{T.id, 5, "distance", 2985});
         italy.addEdge("connection", turkey, new Object[]{T.id, 6, "distance", 3000});
+    }
+
+    public static void addBSBMIndexes(TinkerGraph graph) {
+        final Set<String> vertexIndexKeys = Set.of("ProductPropertyTextual_1", "ProductPropertyTextual_2", "ProductPropertyTextual_3",
+                "ProductPropertyNumeric_1", "ProductPropertyNumeric_2", "ProductPropertyNumeric_4",
+                "review", "reviewerID", "productID",
+                "type", "Rating_2", "label_n");
+
+        vertexIndexKeys.forEach(k -> graph.createIndex(k, Vertex.class));
+        //graph.getIndexedKeys(Vertex.class).forEach(System.out::println);
     }
 }
